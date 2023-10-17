@@ -5,7 +5,14 @@ class CategoriesController < ApplicationController
   # GET /categories or /categories.json
   def index
     @categories = Category.where(user_id: current_user.id)
-    @total = "will work"
+    @budget = 1000
+    @user = current_user
+    @total = @user.payments.sum(:amount)
+    if @total > @budget
+      @over_budget = true
+      @diffrence = @total - @budget
+    end
+
   end
 
   # GET /categories/new
