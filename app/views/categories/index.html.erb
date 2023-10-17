@@ -1,14 +1,22 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Categories</h1>
-
+<div class="flex flex-col h-screen">
+ <div class="bg-sky-700 p-4 flex items-center">
+  <a href="/">
+    <%= image_tag('back.png', width: '30', height: '6') %>
+   </a>  
+  <h2 class="text-light text-center text-white flex-1">CATEGORIES</h2>
+</div>
+<div class="lg:w-2/5  w-100 lg:mx-auto flex flex-col border p-2 h-full">
+<p style="color: green"><%= notice %></p>
 <div id="categories">
   <% @categories.each do |category| %>
-    <%= render category %>
-    <p>
-      <%= link_to "Show this category", category %>
-    </p>
+    <a href="#">
+    <%= render category, total: @total %>
+  </a>
   <% end %>
 </div>
 
-<%= link_to "New category", new_category_path %>
+<%= link_to "Add new category", new_category_path, class: "p-3 m-3 bg-sky-700 rounded text-center text-white" %>
+</div>
+</div>

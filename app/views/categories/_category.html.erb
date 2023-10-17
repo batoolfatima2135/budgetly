@@ -1,18 +1,12 @@
-<div id="<%= dom_id category %>">
-  <p>
-    <strong>Name:</strong>
+<div id="<%= dom_id category %>" class="flex border m-2  items-center p-5">
+    <div class="col">
+    <%= image_tag category.icon, style: 'height: 60px;', class: 'mx-3' if category.icon.attached? %>
+
+  </div>
+  <p class="font-medium text-gray-400 text-xl mx-3 ">
     <%= category.name %>
   </p>
-
-  <p>
-    <strong>Icon:</strong>
-    <%= image_tag category.icon if category.icon.attached? %>
-
+   <p class="text-center font-bold text-xl  ml-auto">
+    <%= total %>
   </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= category.user_id %>
-  </p>
-
 </div>
