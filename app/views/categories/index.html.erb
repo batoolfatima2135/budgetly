@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <div class="flex flex-col h-screen">
  <div class="bg-sky-700 p-4 flex items-center">
   <a href="/">
@@ -9,10 +7,20 @@
 </div>
 <div class="lg:w-2/5  w-100 lg:mx-auto flex flex-col border p-2 h-full">
 <p style="color: green"><%= notice %></p>
+<div class="border m-2 p-5 mx-3 ">
+  <div class=" flex items-center ">
+  <p class="font-medium text-gray-500 text-xl ">Your monthly budget is</p>
+  <p class="text-center text-red-600 font-bold text-xl  ml-auto">$<%=  @budget %> </p>
+  </div>
+  <% if @over_budget %>
+  <p class="mt-1 text-red-600 font-medium">You are <b>$<%=  @diffrence %></b> over your budget</p>
+  <% end %>
+</div>
+
 <div id="categories">
   <% @categories.each do |category| %>
-    <a href="#">
-    <%= render category, total: @total %>
+    <a href="<%= category_payments_path(category) %>">
+    <%= render category, total: @total, over_budget: @over_budget %>
   </a>
   <% end %>
 </div>

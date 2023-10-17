@@ -3,10 +3,10 @@
     <%= image_tag category.icon, style: 'height: 60px;', class: 'mx-3' if category.icon.attached? %>
 
   </div>
-  <p class="font-medium text-gray-400 text-xl mx-3 ">
+  <p class="font-medium text-gray-500 text-xl mx-3 ">
     <%= category.name %>
   </p>
-   <p class="text-center font-bold text-xl  ml-auto">
-    <%= total %>
+   <p class="text-center font-bold text-xl  ml-auto <%= over_budget ? 'text-red-500' : 'text-black' %>">
+    <%=  number_to_currency(category.payments.sum(:amount), unit: '$') %>
   </p>
 </div>
