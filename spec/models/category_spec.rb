@@ -1,35 +1,49 @@
+# spec/models/category_spec.rb
+
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-   let(:user) { User.create!(email: 'Mike Dane@gmail.com', name: 'Mike Dane' password: 'f4k3p455w0rd') }
+  describe 'validations' do
+     it 'is valid with valid attributes' do
+    user = User.create(email: 'user@example.com', password: 'password')
+    file = Tempfile.new(['example_image', '.png'])
+    icon = fixture_file_upload(file.path, 'image/png')
+    category = Category.new(name: 'Example Category', user: user)
+    category.icon.attach(icon)
+   
+    expect(category.icon).to be_attached
+    expect(category).to be_valid
+    end
 
-  it 'is valid with valid attributes' do
-    category = Category.create(name: 'Rice', measurement_unit: 'kg', price: 15, quantity: -3, user:)
-    expect(food).to be_valid
+      it 'is not valid without a name' do
+         user = User.create(email: 'user@example.com', password: 'password')
+        category = Category.new(user: user)
+        expect(category).to_not be_valid
+      end
+
+      it 'is not valid without an icon' do
+        user = User.create(email: 'user@example.com', password: 'password')
+        category = Category.new(name: 'Example Category', user: user)
+        expect(category).to_not be_valid
+      end
   end
 
-  it 'is not valid without name' do
-    food = Food.create(measurement_unit: 'kg', price: 15, quantity: -3, user:)
-    expect(food).not_to be_valid
+  describe 'associations' do
+    it 'belongs to a user' do
+      association = Category.reflect_on_association(:user)
+      expect(association.macro).to eq :belongs_to
+    end
+
+    it 'has many payments' do
+      association = Category.reflect_on_association(:payments)
+      expect(association.macro).to eq :has_many
+    end
   end
 
-  it 'is not valid without measurement_unit' do
-    food = Food.create(name: 'Rice', price: 15, quantity: -3, user:)
-    expect(food).not_to be_valid
-  end
-
-  it 'is not valid without price' do
-    food = Food.create(name: 'Rice', measurement_unit: 'kg', quantity: -3, user:)
-    expect(food).not_to be_valid
-  end
-
-  it 'is not valid without quantity' do
-    food = Food.create(name: 'Rice', measurement_unit: 'kg', price: 15, user:)
-    expect(food).not_to be_valid
-  end
-
-  it 'is not valid without user' do
-    food = Food.create(name: 'Rice', measurement_unit: 'kg', price: 15, quantity: -3)
-    expect(food).not_to be_valid
+  describe 'attachments' do
+    it 'has one attached icon' do
+      category = Category.new
+      expect(category.icon).to be_an_instance_of(ActiveStorage::Attached::One)
+    end
   end
 end
