@@ -26,7 +26,7 @@ class CategoriesController < ApplicationController
     @category.user = current_user
     respond_to do |format|
       if @category.save
-        format.html { redirect_to categories_url(@category), notice: "Category was successfully created." }
+        format.html { redirect_to categories_url, notice: "Category was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
