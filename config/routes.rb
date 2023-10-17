@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :payments
-  resources :categories
+  resources :categories,  only: [:new, :create, :index] do
+    resources :payments, only: [:index, :new, :create]
+  end
   get 'home/index'
   devise_for :users
   root 'home#index'
