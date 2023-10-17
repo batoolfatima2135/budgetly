@@ -4,6 +4,7 @@
     <%= image_tag('back.png', width: '30', height: '6') %>
    </a>  
   <h2 class="text-light text-center text-white flex-1">TRANSCATIONS</h2>
+  <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "text-white" %>
 </div>
 <div class="lg:w-2/5  w-100 lg:mx-auto flex flex-col border p-5 h-full">
 <p style="color: green"><%= notice %></p>
