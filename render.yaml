@@ -1,0 +1,18 @@
+databases:
+  - name: budgetly
+    databaseName: budgetly
+    user: budgetly_user
+
+services:
+  - type: web
+    name: budgetly
+    runtime: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: budgetly
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false

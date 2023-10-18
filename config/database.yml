@@ -87,6 +87,4 @@ test:
 #
 production:
   <<: *default
-  database: budgetify_production
-  username: postgres
-  password: 12345
+  url: <%= ENV['DATABASE_URL'] %>
