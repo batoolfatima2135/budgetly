@@ -1,6 +1,5 @@
 describe "/payments", type: :request do
- let(:user) { User.first }
-
+let(:user) { User.create(email: 'new@example.com', name: "Example Name", password: 'password123') }
  before(:each) do
   login_as(user, scope: :user)
   @file = Tempfile.new(['example_image', '.png'])
@@ -10,6 +9,11 @@ describe "/payments", type: :request do
   @category.save
  
 end
+ after(:each) do
+    user.payments.destroy_all
+    user.categories.destroy_all
+    user.destroy if user.persisted?
+  end
 
   describe "GET /index" do
     it "renders a successful response" do

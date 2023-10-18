@@ -3,39 +3,34 @@
 require 'rails_helper'
 
 RSpec.describe Payment, type: :model do
+  let(:user) { User.create(email: 'user@example.com', password: 'password') }
+  after(:each) do
+      user.destroy if user.persisted?
+  end
   it 'is valid with valid attributes' do
-    user = User.create(email: 'user@example.com', password: 'password')
     category = Category.create(name: 'Example Category', user: user)
-
     payment = Payment.new(name: 'Example Payment', amount: 100.00, author: user, category: category)
     
     expect(payment).to be_valid
   end
 
   it 'is not valid without a name' do
-    user = User.create(email: 'user@example.com', password: 'password')
     category = Category.create(name: 'Example Category', user: user)
-
     payment = Payment.new(amount: 100.00, author: user, category: category)
-    
     expect(payment).not_to be_valid
     expect(payment.errors[:name]).to include("can't be blank")
   end
 
   it 'is not valid without an amount' do
-    user = User.create(email: 'user@example.com', password: 'password')
     category = Category.create(name: 'Example Category', user: user)
-
     payment = Payment.new(name: 'Example Payment', author: user, category: category)
-    
+   
     expect(payment).not_to be_valid
     expect(payment.errors[:amount]).to include("can't be blank")
   end
 
   it 'is not valid without an author' do
-    user = User.create(email: 'user@example.com', password: 'password')
     category = Category.create(name: 'Example Category', user: user)
-
     payment = Payment.new(name: 'Example Payment', amount: 100.00, category: category)
     
     expect(payment).not_to be_valid
@@ -43,7 +38,6 @@ RSpec.describe Payment, type: :model do
   end
 
   it 'is not valid without a category' do
-    user = User.create(email: 'user@example.com', password: 'password')
 
     payment = Payment.new(name: 'Example Payment', amount: 100.00, author: user)
     

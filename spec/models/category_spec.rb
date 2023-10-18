@@ -3,9 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
+  let(:user) { User.create(email: 'user@example.com', password: 'password') }
+  after(:each) do
+      user.destroy if user.persisted?
+  end
   describe 'validations' do
      it 'is valid with valid attributes' do
-    user = User.create(email: 'user@example.com', password: 'password')
     file = Tempfile.new(['example_image', '.png'])
     icon = fixture_file_upload(file.path, 'image/png')
     category = Category.new(name: 'Example Category', user: user)
@@ -13,16 +16,17 @@ RSpec.describe Category, type: :model do
    
     expect(category.icon).to be_attached
     expect(category).to be_valid
+    user.destroy if user.persisted?
     end
 
       it 'is not valid without a name' do
-         user = User.create(email: 'user@example.com', password: 'password')
+ 
         category = Category.new(user: user)
         expect(category).to_not be_valid
       end
 
       it 'is not valid without an icon' do
-        user = User.create(email: 'user@example.com', password: 'password')
+       
         category = Category.new(name: 'Example Category', user: user)
         expect(category).to_not be_valid
       end

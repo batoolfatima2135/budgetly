@@ -2,7 +2,11 @@ require 'rails_helper'
 
 
 RSpec.describe "/categories", type: :request do
-  let(:user) { User.first }
+  let(:user) { User.create(email: 'new@example.com', name: "Example Name", password: 'password123') }
+  after(:each) do
+    user.categories.destroy_all
+    user.destroy if user.persisted?
+  end
 
   let(:valid_attributes) {
   file = Tempfile.new(['example_image', '.png'])
