@@ -1,7 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: %i[show edit update destroy]
 
-
   def index
     @category = Category.find(params[:category_id])
     @payments = Payment.where(author_id: current_user.id, category_id: @category.id).order(created_at: :desc)

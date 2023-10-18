@@ -21,7 +21,6 @@ RSpec.feature 'Categories index', type: :feature do
     expect(page).to have_content('Example transaction 1').and have_content('Example transaction 2')
   end
 
-
   scenario 'display total amount of transactions in category' do
     expect(page).to have_content('$74.00')
   end

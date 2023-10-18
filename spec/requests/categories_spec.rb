@@ -36,7 +36,6 @@ RSpec.describe '/categories', type: :request do
     end
   end
 
-
   describe 'GET /new' do
     it 'renders a successful response' do
       get new_category_url
@@ -64,7 +63,6 @@ RSpec.describe '/categories', type: :request do
           post categories_url, params: { category: invalid_attributes }
         end.to change(Category, :count).by(0)
       end
-
 
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post categories_url, params: { category: invalid_attributes }
