@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :set_category, only: %i[show edit update destroy]
   before_action :authenticate_user!
 
   # GET /categories or /categories.json
@@ -8,11 +8,10 @@ class CategoriesController < ApplicationController
     @budget = 1000
     @user = current_user
     @total = @user.payments.sum(:amount)
-    if @total > @budget
-      @over_budget = true
-      @diffrence = @total - @budget
-    end
+    return unless @total > @budget
 
+    @over_budget = true
+    @diffrence = @total - @budget
   end
 
   # GET /categories/new
@@ -26,7 +25,7 @@ class CategoriesController < ApplicationController
     @category.user = current_user
     respond_to do |format|
       if @category.save
-        format.html { redirect_to categories_url, notice: "Category was successfully created." }
+        format.html { redirect_to categories_url, notice: 'Category was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -38,19 +37,20 @@ class CategoriesController < ApplicationController
     @category.destroy
 
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
+      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def category_params
-      params.require(:category).permit(:name, :icon, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_category
+    @category = Category.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def category_params
+    params.require(:category).permit(:name, :icon, :user_id)
+  end
 end

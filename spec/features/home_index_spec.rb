@@ -20,5 +20,4 @@ RSpec.feature 'home index', type: :feature do
     click_link('SIGN UP')
     expect(page).to have_current_path(new_user_registration_path)
   end
-
 end

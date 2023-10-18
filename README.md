@@ -61,7 +61,8 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Live Demo Link](https://recipe-app-aep2.onrender.com/)
+- [Live Demo Link](https://budgetly-ub3z.onrender.com)
+- [Presentation Link]()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -187,7 +188,7 @@ If you like this project kindly give stars
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-I would like to thank microverse for this project
+I would like to thank microverse for this project and regoire Vella for Original design idea [Gregoire Vella on Behance](https://www.behance.net/gregoirevella).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

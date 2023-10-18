@@ -5,31 +5,29 @@ require 'rails_helper'
 RSpec.describe Category, type: :model do
   let(:user) { User.create(email: 'user@example.com', password: 'password') }
   after(:each) do
-      user.destroy if user.persisted?
+    user.destroy if user.persisted?
   end
   describe 'validations' do
-     it 'is valid with valid attributes' do
-    file = Tempfile.new(['example_image', '.png'])
-    icon = fixture_file_upload(file.path, 'image/png')
-    category = Category.new(name: 'Example Category', user: user)
-    category.icon.attach(icon)
-   
-    expect(category.icon).to be_attached
-    expect(category).to be_valid
-    user.destroy if user.persisted?
+    it 'is valid with valid attributes' do
+      file = Tempfile.new(['example_image', '.png'])
+      icon = fixture_file_upload(file.path, 'image/png')
+      category = Category.new(name: 'Example Category', user:)
+      category.icon.attach(icon)
+
+      expect(category.icon).to be_attached
+      expect(category).to be_valid
+      user.destroy if user.persisted?
     end
 
-      it 'is not valid without a name' do
- 
-        category = Category.new(user: user)
-        expect(category).to_not be_valid
-      end
+    it 'is not valid without a name' do
+      category = Category.new(user:)
+      expect(category).to_not be_valid
+    end
 
-      it 'is not valid without an icon' do
-       
-        category = Category.new(name: 'Example Category', user: user)
-        expect(category).to_not be_valid
-      end
+    it 'is not valid without an icon' do
+      category = Category.new(name: 'Example Category', user:)
+      expect(category).to_not be_valid
+    end
   end
 
   describe 'associations' do
