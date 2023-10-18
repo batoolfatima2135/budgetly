@@ -1,0 +1,18 @@
+<div class="p-3 my-2 border">
+  <div id="<%= dom_id payment %>" class="flex justify-between ">
+    <p class="text-lg"> 
+      <%= payment.name %>
+    </p>
+  
+    <p class="font-bold">
+      <strong>$</strong>
+      <%= payment.amount %>
+    </p>
+ 
+  </div>
+  <p class= "text-gray-400 my-1">
+      <%= payment.created_at.strftime('%B %d, %Y %I:%M %p') %>
+</p>
+</div>
+
+

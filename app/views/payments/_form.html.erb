@@ -1,0 +1,29 @@
+<div class="lg:w-2/5  w-100 lg:mx-auto flex flex-col border p-2 h-5/6 ">
+<%= form_with(model: [@category, @payment]) do |form| %>
+  <% if payment.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+
+      <ul>
+        <% payment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.text_field :name, class:"w-full rounded-md p-3 focus:outline-none border mt-4", placeholder: "Name", required: true %>
+  </div>
+
+  <div>
+   <%= form.number_field :amount, class: "w-full rounded-md p-3 focus:outline-none border mt-4", placeholder: "$ Amount", required: true, step: "0.01" %>
+  </div>
+
+
+
+  <div>
+    <%= form.submit "Save",  class: 'mb-3 bg-sky-700  text-white text-center w-full p-2 hover:bg-sky-800 rounded my-4 ' %>
+  </div>
+<% end %>
+</div>

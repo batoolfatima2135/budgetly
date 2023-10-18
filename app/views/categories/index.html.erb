@@ -1,0 +1,33 @@
+<div class="flex flex-col h-screen">
+  <div class="bg-sky-700 p-4 flex items-center">
+    <a href="/">
+      <%= image_tag('back.png', width: '30', height: '6') %>
+    </a>  
+    <h2 class="text-light text-center text-white flex-1">CATEGORIES</h2>
+      <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "text-white" %>
+  </div>
+  <div class="lg:w-2/5  w-100 lg:mx-auto flex flex-col border p-2 h-full">
+    <p style="color: green" class="text-center"><%= notice %></p>
+    <div class="border m-2 p-5 mx-3 ">
+      <div class=" flex items-center ">
+        <p class="font-medium text-gray-500 text-xl ">MONTHLY BUDGET</p>
+        <p class="text-center font-bold text-xl  ml-auto">$<%=  @budget %> </p>
+      </div>
+      <% if @over_budget %>
+      <p class="mt-1 text-red-600 font-medium">You are <b>$<%=  @diffrence %></b> over your budget</p>
+      <% end %>
+    </div>
+
+    <div id="categories">
+      <% @categories.each do |category| %>
+        <a href="<%= category_payments_path(category) %>">
+        <%= render category, total: @total, over_budget: @over_budget %>
+      </a>
+      <% end %>
+    </div>
+
+   <div class="fixed bottom-0 left-0 right-0 bg-green-600 p-5 lg:w-2/5 mx-auto">
+    <%= link_to "Add New Category", new_category_path, class: "block w-full p-5 bg-green-600 border border-2 text-lg font-medium border-white text-center text-white" %>
+   </div>
+  <div>
+</div>

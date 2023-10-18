@@ -1,0 +1,25 @@
+<div class="flex flex-col ">
+ <div class="bg-sky-700 p-4 flex items-center">
+  <a href="/">
+    <%= image_tag('back.png', width: '30', height: '6') %>
+   </a>  
+  <h2 class="text-light text-center text-white flex-1">TRANSCATIONS</h2>
+  <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "text-white" %>
+</div>
+<div class="lg:w-2/5  w-100 lg:mx-auto flex flex-col border p-5 h-full">
+<p style="color: green"><%= notice %></p>
+<div class="flex justify-between my-2 py-3">
+  <p class="font-medium text-gray-400 text-xl">Total Transactions</p>
+  <p class="text-center font-bold text-xl "> <%=  number_to_currency(@category.payments.sum(:amount), unit: '$') %></p>
+</div>
+<div id="payments">
+  <% @payments.each do |payment| %>
+    <%= render payment %>
+
+  <% end %>
+
+</div>
+<div class="fixed bottom-0 left-0 right-0 bg-green-600 p-5 lg:w-2/5 mx-auto">
+  <%= link_to "New Payment", new_category_payment_path(@category), class: "block w-full p-5 bg-green-600 border border-2 text-lg font-medium border-white text-center text-white" %>
+</div>
+</div>

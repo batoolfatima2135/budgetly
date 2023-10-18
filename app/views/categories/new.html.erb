@@ -1,0 +1,17 @@
+<div class="flex flex-col h-screen">
+ <div class="bg-sky-700 p-4 flex items-center">
+  <a href="/">
+    <%= image_tag('back.png', width: '30', height: '6') %>
+   </a>  
+  <h2 class="text-light text-center text-white flex-1">NEW CATEGORY</h2>
+  <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "text-white" %>
+</div>
+
+<%= render "form", category: @category %>
+
+<br>
+
+<div>
+
+</div>
+</div>

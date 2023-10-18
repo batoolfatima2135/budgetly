@@ -1,0 +1,35 @@
+
+<div class="lg:w-2/5  w-100 lg:mx-auto flex flex-col border p-2 h-5/6 ">
+<%= form_with(model: category) do |form| %>
+  <% if category.errors.any? %>
+    <div style="color: red">
+      <ul>
+        <% category.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+ 
+    <%= form.text_field :name,  class:"w-full rounded-md p-3 focus:outline-none border mt-4", placeholder: "Name", required: true  %>
+  </div>
+
+  <div>
+    <%= form.label :icon, style: "display: block", class: 'mx-3 pt-3 font-medium text-lg' %>
+    <%= form.file_field :icon, style: "display: block",  class:"w-full rounded-md p-3 focus:outline-none", required: true  %>
+
+  </div>
+
+
+  <div>
+    <%= form.submit "Save", class: 'bg-sky-700  text-white text-center w-full p-2 hover:bg-sky-800 rounded my-4 ' %>
+    
+  </div>
+  <div class="text-center">
+  <%= link_to "Back to categories", categories_path, class: "bg-white-700  text-gray-400 text-center w-full p-3  rounded my-4 " %>
+  </div>
+<% end %>
+
+</div>
